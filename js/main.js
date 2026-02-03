@@ -1,14 +1,107 @@
 /**
- * Portfolio Website - Main JavaScript
- * Handles navigation, animations, and interactivity
+ * Wenbo Zhao Portfolio - Main JavaScript
+ * Handles navigation, project modals, and animations
  */
+
+// Project Data
+const projectData = {
+    'creative-system': {
+        category: 'Marketing Strategy',
+        title: 'Growth + Creative System',
+        overview: 'Built a systematic ad creative testing framework and iteration pipeline to move from guesswork to data-driven creative decisions.',
+        role: 'Marketing Strategist & Creative Director',
+        tools: ['Google Ads', 'GA4', 'Google Tag Manager', 'Adobe Premiere Pro', 'Adobe After Effects'],
+        problem: 'Creative fatigue was killing ad performance. The team was producing content without a clear testing methodology, leading to inconsistent results and wasted ad spend. There was no systematic way to identify what creative elements were actually driving conversions.',
+        solution: [
+            'Designed a modular creative testing framework that isolates variables (hooks, offers, CTAs, formats)',
+            'Built a tracking system to measure creative performance beyond surface-level metrics',
+            'Created a rapid iteration process: test → analyze → iterate in 7-day cycles',
+            'Established creative briefs and UGC direction guidelines for consistent output',
+            'Implemented naming conventions and organization systems for creative assets'
+        ],
+        outcomes: [
+            'Reduced time-to-insight on creative performance from weeks to days',
+            'Established repeatable process that identified winning hooks consistently',
+            'Created documentation and playbooks for scaling creative production',
+            'Improved creative team efficiency by standardizing the feedback loop'
+        ]
+    },
+    'shopify-storefront': {
+        category: 'Ecommerce',
+        title: 'Shopify Storefront Build',
+        overview: 'Designed and built a premium Shopify storefront focused on conversion optimization, brand presentation, and seamless user experience.',
+        role: 'Front-End Developer & UI Designer',
+        tools: ['Shopify', 'Liquid', 'JavaScript', 'CSS', 'Adobe Photoshop'],
+        problem: 'The existing store had poor conversion rates due to a generic template that didn\'t communicate brand value. Product pages lacked trust signals, the mobile experience was clunky, and the checkout flow had unnecessary friction points.',
+        solution: [
+            'Designed custom sections for hero, product showcases, and social proof',
+            'Built conversion-focused product pages with urgency elements and clear CTAs',
+            'Optimized mobile experience with thumb-friendly navigation and fast load times',
+            'Implemented trust badges, reviews integration, and FAQ sections strategically',
+            'Created custom landing page templates for campaign-specific traffic'
+        ],
+        outcomes: [
+            'Improved mobile usability scores and reduced bounce rate',
+            'Streamlined checkout flow by reducing unnecessary steps',
+            'Created reusable section templates for future marketing campaigns',
+            'Delivered fully documented codebase for ongoing maintenance'
+        ]
+    },
+    'google-ads': {
+        category: 'Performance Marketing',
+        title: 'Google Ads Setup',
+        overview: 'Built a complete Google Ads infrastructure from scratch — campaign structure, conversion tracking, and attribution setup ready for scaling.',
+        role: 'Performance Marketing Specialist',
+        tools: ['Google Ads', 'GA4', 'Google Tag Manager', 'Google Merchant Center', 'Looker Studio'],
+        problem: 'The business had no paid acquisition channel and needed to launch Google Ads from zero. Previous attempts failed due to poor campaign structure and no conversion tracking, making it impossible to measure ROI or optimize effectively.',
+        solution: [
+            'Audited business goals and identified high-intent keywords and audiences',
+            'Built Search campaign structure with proper ad group theming and negative keywords',
+            'Set up Shopping campaigns with optimized product feed and bidding strategy',
+            'Implemented full conversion tracking: purchases, add-to-carts, and micro-conversions',
+            'Created GA4 integration with custom events and attribution modeling',
+            'Built reporting dashboard for ongoing performance monitoring'
+        ],
+        outcomes: [
+            'Launched campaigns with proper structure from day one',
+            'Achieved accurate conversion tracking across all touchpoints',
+            'Created foundation for data-driven optimization and scaling',
+            'Delivered documentation for ongoing campaign management'
+        ]
+    },
+    'portfolio-platform': {
+        category: 'Development',
+        title: 'Front-End Portfolio Platform',
+        overview: 'Built a modern portfolio website using component-based architecture, focusing on performance, accessibility, and maintainable code.',
+        role: 'Front-End Developer',
+        tools: ['Next.js', 'React', 'CSS', 'JavaScript', 'HTML'],
+        problem: 'Needed a portfolio that could showcase work effectively while demonstrating front-end capabilities. Template solutions felt generic and didn\'t allow for the custom interactions and design details that would differentiate the presentation.',
+        solution: [
+            'Architected component-based structure for reusability and maintainability',
+            'Implemented responsive design system with CSS custom properties',
+            'Built smooth animations and transitions using CSS and vanilla JavaScript',
+            'Created modal system for project case studies with accessible focus management',
+            'Optimized for performance with semantic HTML and minimal dependencies'
+        ],
+        outcomes: [
+            'Zero external JavaScript dependencies for fast load times',
+            'Achieved accessibility compliance with proper ARIA labels and keyboard navigation',
+            'Created reusable component patterns for future expansion',
+            'Built clean, documented codebase that demonstrates coding standards'
+        ]
+    }
+};
 
 // DOM Elements
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
-const contactForm = document.getElementById('contact-form');
+const projectCards = document.querySelectorAll('.project-card');
+const modal = document.getElementById('project-modal');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.querySelector('.modal-close');
+const modalOverlay = document.querySelector('.modal-overlay');
 const currentYearSpan = document.getElementById('current-year');
 
 /**
@@ -17,7 +110,7 @@ const currentYearSpan = document.getElementById('current-year');
 function init() {
     setupNavigation();
     setupScrollEffects();
-    setupContactForm();
+    setupProjectModals();
     setupRevealAnimations();
     setCurrentYear();
 }
@@ -30,6 +123,7 @@ function setupNavigation() {
     navToggle.addEventListener('click', () => {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
     });
 
     // Close mobile menu when clicking a link
@@ -37,15 +131,8 @@ function setupNavigation() {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
     });
 
     // Update active nav link on scroll
@@ -76,136 +163,155 @@ function updateActiveNavLink() {
  * Scroll effects for navbar
  */
 function setupScrollEffects() {
-    let lastScroll = 0;
-
     window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-
-        // Add/remove scrolled class for navbar styling
-        if (currentScroll > 50) {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-
-        lastScroll = currentScroll;
     });
 }
 
 /**
- * Contact form handling
+ * Project modal functionality
  */
-function setupContactForm() {
-    if (!contactForm) return;
+function setupProjectModals() {
+    // Open modal on project card click
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projectId = card.dataset.project;
+            openProjectModal(projectId);
+        });
 
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        // Keyboard accessibility
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const projectId = card.dataset.project;
+                openProjectModal(projectId);
+            }
+        });
+    });
 
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
+    // Close modal handlers
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
 
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-
-        try {
-            // Simulate form submission (replace with actual endpoint)
-            await simulateFormSubmission(data);
-
-            // Show success message
-            showNotification('Message sent successfully!', 'success');
-            contactForm.reset();
-        } catch (error) {
-            // Show error message
-            showNotification('Failed to send message. Please try again.', 'error');
-        } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) {
+            closeModal();
         }
     });
 }
 
 /**
- * Simulate form submission (replace with actual API call)
+ * Open project modal with data
  */
-function simulateFormSubmission(data) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Log form data for development
-            console.log('Form submitted:', data);
-            resolve();
-        }, 1500);
-    });
+function openProjectModal(projectId) {
+    const project = projectData[projectId];
+    if (!project) return;
+
+    // Build modal content
+    const toolsHTML = project.tools.map(tool =>
+        `<span class="modal-tool">${tool}</span>`
+    ).join('');
+
+    const solutionHTML = project.solution.map(item =>
+        `<li>${item}</li>`
+    ).join('');
+
+    const outcomesHTML = project.outcomes.map(item =>
+        `<li>${item}</li>`
+    ).join('');
+
+    modalContent.innerHTML = `
+        <div class="modal-header">
+            <span class="modal-category">${project.category}</span>
+            <h2 class="modal-title" id="modal-title">${project.title}</h2>
+            <p class="modal-overview">${project.overview}</p>
+        </div>
+
+        <div class="modal-section">
+            <h3 class="modal-section-title">My Role</h3>
+            <p class="modal-section-content">${project.role}</p>
+        </div>
+
+        <div class="modal-section">
+            <h3 class="modal-section-title">Tools & Skills</h3>
+            <div class="modal-tools">${toolsHTML}</div>
+        </div>
+
+        <div class="modal-section">
+            <h3 class="modal-section-title">The Problem</h3>
+            <p class="modal-section-content">${project.problem}</p>
+        </div>
+
+        <div class="modal-section">
+            <h3 class="modal-section-title">The Solution</h3>
+            <div class="modal-section-content">
+                <ul>${solutionHTML}</ul>
+            </div>
+        </div>
+
+        <div class="modal-section">
+            <h3 class="modal-section-title">Outcomes</h3>
+            <div class="modal-section-content">
+                <ul>${outcomesHTML}</ul>
+            </div>
+        </div>
+    `;
+
+    // Show modal
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // Focus management
+    modalClose.focus();
+
+    // Trap focus within modal
+    trapFocus(modal);
 }
 
 /**
- * Show notification message
+ * Close modal
  */
-function showNotification(message, type = 'success') {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
+function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+
+    // Return focus to the trigger element
+    const activeCard = document.querySelector('.project-card:focus');
+    if (activeCard) {
+        activeCard.focus();
     }
+}
 
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
+/**
+ * Trap focus within modal for accessibility
+ */
+function trapFocus(element) {
+    const focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
 
-    // Add styles
-    Object.assign(notification.style, {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        padding: '16px 24px',
-        borderRadius: '8px',
-        backgroundColor: type === 'success' ? '#10b981' : '#ef4444',
-        color: '#ffffff',
-        fontWeight: '500',
-        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-        zIndex: '9999',
-        animation: 'slideIn 0.3s ease'
+    element.addEventListener('keydown', function(e) {
+        if (e.key !== 'Tab') return;
+
+        if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+                lastFocusable.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastFocusable) {
+                firstFocusable.focus();
+                e.preventDefault();
+            }
+        }
     });
-
-    // Add animation keyframes
-    if (!document.querySelector('#notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    document.body.appendChild(notification);
-
-    // Remove notification after 4 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 4000);
 }
 
 /**
@@ -213,7 +319,7 @@ function showNotification(message, type = 'success') {
  */
 function setupRevealAnimations() {
     const revealElements = document.querySelectorAll(
-        '.skill-category, .project-card, .timeline-item, .contact-method'
+        '.bento-card, .project-card, .skill-group'
     );
 
     // Add reveal class to elements
@@ -226,7 +332,7 @@ function setupRevealAnimations() {
         threshold: 0.1
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
@@ -249,10 +355,10 @@ function setCurrentYear() {
 }
 
 /**
- * Smooth scroll for anchor links (fallback for older browsers)
+ * Smooth scroll for anchor links
  */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -264,40 +370,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-/**
- * Typing animation for hero section (optional enhancement)
- */
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
-
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-
-    type();
-}
-
-/**
- * Parallax effect for hero section (subtle)
- */
-function setupParallax() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const rate = scrolled * 0.3;
-        hero.style.backgroundPositionY = `${rate}px`;
-    });
-}
-
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
-
-// Optional: Add parallax effect
-// setupParallax();
