@@ -25,7 +25,8 @@ const projectData = {
             'Launched fully functional Shopify store with optimized user experience',
             'Built growing social presence through strategic influencer partnerships',
             'Created foundation for scalable paid acquisition'
-        ]
+        ],
+        mediaPath: 'assets/work/guyu'
     },
     'refined-concept': {
         category: 'Ecommerce Brand Build',
@@ -46,93 +47,49 @@ const projectData = {
             'Built storefront that communicates premium value at accessible prices',
             'Created scalable collection framework for product expansion',
             'Established partnership workflow for ongoing collaboration'
-        ]
+        ],
+        mediaPath: 'assets/work/refined-concept'
     },
-    'creative-system': {
-        category: 'Marketing Strategy',
-        title: 'Growth + Creative System',
-        overview: 'Built a systematic ad creative testing framework for Google Ads and Meta Ads, using Photoshop, Premiere Pro, and After Effects to produce UGC-style creatives with a focus on stronger hooks and rapid iteration.',
-        role: 'Marketing Strategist & Creative Director',
-        tools: ['Google Ads', 'Meta Ads', 'GA4', 'Google Tag Manager', 'Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects'],
-        problem: 'Creative fatigue was killing ad performance across Google and Meta platforms. The team was producing content without a clear testing methodology, leading to inconsistent results and wasted ad spend. Hooks weren\'t grabbing attention in the first 2 seconds, and there was no systematic way to identify what creative elements were actually driving conversions.',
+    'ads-growth-engine': {
+        category: 'Performance Marketing / Creative Strategy',
+        title: 'Ads + Growth Engine',
+        overview: 'Creative strategy + production and Google/Meta execution with tracking foundations and a repeatable testing loop to drive higher CTR and scalable acquisition.',
+        role: 'Creative Strategist / Performance Marketer',
+        tools: ['Meta Ads', 'Google Ads', 'Creative Strategy', 'Creative Production', 'Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'GA4', 'Google Tag Manager', 'Creative Testing', 'Attribution Setup'],
+        problem: 'Performance stalls when creative is inconsistent and measurement is unclear—teams burn budget without learning what actually drives attention, clicks, and conversions.',
         solution: [
-            'Designed a modular creative testing framework that isolates variables (hooks, offers, CTAs, formats)',
-            'Used Photoshop, Premiere Pro, and After Effects to produce UGC-style creatives',
-            'Focused on better hooks and stronger first 2 seconds to improve CTR',
-            'Built a tracking system to measure creative performance beyond surface-level metrics',
-            'Created a rapid iteration loop: test → analyze → iterate in short cycles',
-            'Established creative briefs and UGC direction guidelines for consistent output'
+            'Developed creative strategy and test plans (hooks, angles, formats, CTAs) to generate consistent iterations',
+            'Produced UGC-style creatives with strong first 2 seconds using Photoshop / Premiere Pro / After Effects to improve scroll-stop and CTR',
+            'Ran and optimized campaigns across Meta Ads + Google Ads to test, learn, and scale winners',
+            'Set up GA4 + GTM foundations to track key funnel actions and turn results into next tests',
+            'Built a repeatable loop: test → analyze → iterate in short cycles to reduce guesswork'
         ],
         outcomes: [
-            'Reduced time-to-insight on creative performance from weeks to days',
-            'Established repeatable process that identified winning hooks consistently',
-            'Improved hook quality leading to better first-impression engagement',
-            'Created documentation and playbooks for scaling creative production'
-        ]
+            'Faster creative iteration with clearer learnings per test cycle',
+            'More consistent ad performance workflow across channels',
+            'Tracking-ready foundation for smarter optimization and scaling'
+        ],
+        mediaPath: 'assets/work/ads-growth-engine'
     },
-    'shopify-storefront': {
-        category: 'Ecommerce',
-        title: 'Shopify Storefront Build',
-        overview: 'Designed and built a premium Shopify storefront focused on conversion optimization, brand presentation, and seamless user experience.',
-        role: 'Front-End Developer & UI Designer',
-        tools: ['Shopify', 'Liquid', 'JavaScript', 'CSS', 'Adobe Photoshop'],
-        problem: 'The existing store had poor conversion rates due to a generic template that didn\'t communicate brand value. Product pages lacked trust signals, the mobile experience was clunky, and the checkout flow had unnecessary friction points.',
+    'frontend-conversion-ui': {
+        category: 'Development / Conversion UI',
+        title: 'Front-End + Conversion UI Builds',
+        overview: 'Cost-efficient, high-conversion websites and storefront UIs designed for speed, clarity, and fast decision-making.',
+        role: 'Front-End Builder / Conversion-Focused UI',
+        tools: ['Next.js', 'React', 'HTML/CSS/JavaScript', 'Shopify', 'Liquid', 'UI Systems', 'Performance Optimization'],
+        problem: 'Most sites lose users because pages are slow, cluttered, or confusing—people won\'t spend time figuring things out.',
         solution: [
-            'Designed custom sections for hero, product showcases, and social proof',
-            'Built conversion-focused product pages with urgency elements and clear CTAs',
-            'Optimized mobile experience with thumb-friendly navigation and fast load times',
-            'Implemented trust badges, reviews integration, and FAQ sections strategically',
-            'Created custom landing page templates for campaign-specific traffic'
+            'Built modern front-end pages with clear hierarchy, strong typography, and minimal friction',
+            'Designed conversion-first layouts (above-the-fold clarity, strong CTAs, trust cues, clean navigation)',
+            'Implemented Shopify storefront structure when applicable (collections, PDP clarity, merchandising flow)',
+            'Optimized for speed and maintainability (reusable sections/components, lightweight assets)'
         ],
         outcomes: [
-            'Improved mobile usability scores and reduced bounce rate',
-            'Streamlined checkout flow by reducing unnecessary steps',
-            'Created reusable section templates for future marketing campaigns',
-            'Delivered fully documented codebase for ongoing maintenance'
-        ]
-    },
-    'google-ads': {
-        category: 'Performance Marketing',
-        title: 'Google Ads Setup',
-        overview: 'Built a complete Google Ads infrastructure from scratch — campaign structure, conversion tracking, and attribution setup ready for scaling.',
-        role: 'Performance Marketing Specialist',
-        tools: ['Google Ads', 'GA4', 'Google Tag Manager', 'Google Merchant Center', 'Looker Studio'],
-        problem: 'The business had no paid acquisition channel and needed to launch Google Ads from zero. Previous attempts failed due to poor campaign structure and no conversion tracking, making it impossible to measure ROI or optimize effectively.',
-        solution: [
-            'Audited business goals and identified high-intent keywords and audiences',
-            'Built Search campaign structure with proper ad group theming and negative keywords',
-            'Set up Shopping campaigns with optimized product feed and bidding strategy',
-            'Implemented full conversion tracking: purchases, add-to-carts, and micro-conversions',
-            'Created GA4 integration with custom events and attribution modeling',
-            'Built reporting dashboard for ongoing performance monitoring'
+            'Faster browsing and clearer paths to purchase/contact',
+            'More premium perception through consistent spacing and UI polish',
+            'Easier iteration because the structure is modular and reusable'
         ],
-        outcomes: [
-            'Launched campaigns with proper structure from day one',
-            'Achieved accurate conversion tracking across all touchpoints',
-            'Created foundation for data-driven optimization and scaling',
-            'Delivered documentation for ongoing campaign management'
-        ]
-    },
-    'portfolio-platform': {
-        category: 'Development',
-        title: 'Front-End Portfolio Platform',
-        overview: 'Built a modern portfolio website using component-based architecture, focusing on performance, accessibility, and maintainable code.',
-        role: 'Front-End Developer',
-        tools: ['Next.js', 'React', 'CSS', 'JavaScript', 'HTML'],
-        problem: 'Needed a portfolio that could showcase work effectively while demonstrating front-end capabilities. Template solutions felt generic and didn\'t allow for the custom interactions and design details that would differentiate the presentation.',
-        solution: [
-            'Architected component-based structure for reusability and maintainability',
-            'Implemented responsive design system with CSS custom properties',
-            'Built smooth animations and transitions using CSS and vanilla JavaScript',
-            'Created modal system for project case studies with accessible focus management',
-            'Optimized for performance with semantic HTML and minimal dependencies'
-        ],
-        outcomes: [
-            'Zero external JavaScript dependencies for fast load times',
-            'Achieved accessibility compliance with proper ARIA labels and keyboard navigation',
-            'Created reusable component patterns for future expansion',
-            'Built clean, documented codebase that demonstrates coding standards'
-        ]
+        mediaPath: 'assets/work/frontend-conversion-ui'
     }
 };
 
@@ -250,9 +207,21 @@ function setupProjectModals() {
 }
 
 /**
+ * Check if a video file exists (attempts to load it)
+ */
+function checkVideoExists(src) {
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.onloadedmetadata = () => resolve(true);
+        video.onerror = () => resolve(false);
+        video.src = src;
+    });
+}
+
+/**
  * Open project modal with data
  */
-function openProjectModal(projectId) {
+async function openProjectModal(projectId) {
     const project = projectData[projectId];
     if (!project) return;
 
@@ -276,7 +245,33 @@ function openProjectModal(projectId) {
         </div>`
         : '';
 
+    // Check for hero video
+    let mediaHTML = '';
+    if (project.mediaPath) {
+        const heroVideoPath = `${project.mediaPath}/hero.mp4`;
+        const videoExists = await checkVideoExists(heroVideoPath);
+
+        if (videoExists) {
+            mediaHTML = `
+                <div class="modal-media">
+                    <video
+                        class="modal-video"
+                        muted
+                        playsinline
+                        loop
+                        controls
+                        aria-label="Project demo video"
+                    >
+                        <source src="${heroVideoPath}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            `;
+        }
+    }
+
     modalContent.innerHTML = `
+        ${mediaHTML}
         <div class="modal-header">
             <span class="modal-category">${project.category}</span>
             <h2 class="modal-title" id="modal-title">${project.title}</h2>
@@ -333,6 +328,12 @@ function closeModal() {
     modal.hidden = true;
     document.body.style.overflow = '';
 
+    // Pause any playing videos
+    const video = modalContent.querySelector('video');
+    if (video) {
+        video.pause();
+    }
+
     // Return focus to the trigger element
     const activeCard = document.querySelector('.project-card:focus');
     if (activeCard) {
@@ -345,7 +346,7 @@ function closeModal() {
  */
 function trapFocus(element) {
     const focusableElements = element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), video[controls]'
     );
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
