@@ -5,25 +5,69 @@
 
 // Project Data
 const projectData = {
+    'guyu': {
+        category: 'Ecommerce & Growth',
+        title: 'GUYU — Front-End & Growth',
+        timeline: 'June 2025 — January 2026',
+        overview: 'Led market research, Shopify store setup, and influencer-driven social presence growth for an emerging brand.',
+        role: 'Business Builder / Growth + Front-End Execution',
+        tools: ['Shopify', 'Google Ads', 'Meta Ads', 'Adobe Photoshop', 'GA4', 'Google Tag Manager'],
+        problem: 'GUYU needed to establish a market presence from scratch with limited resources. The challenge was to build a compelling storefront, understand competitive positioning, and grow social presence organically through strategic influencer partnerships.',
+        solution: [
+            'Conducted thorough market research: positioning analysis, competitor scan, and offer structuring',
+            'Built and optimized the Shopify storefront with conversion-focused design',
+            'Developed influencer strategy to grow social presence authentically',
+            'Coordinated with content creators for UGC and brand awareness campaigns',
+            'Set up analytics and tracking to measure growth metrics'
+        ],
+        outcomes: [
+            'Established clear brand positioning in a competitive market',
+            'Launched fully functional Shopify store with optimized user experience',
+            'Built growing social presence through strategic influencer partnerships',
+            'Created foundation for scalable paid acquisition'
+        ]
+    },
+    'refined-concept': {
+        category: 'Ecommerce Brand Build',
+        title: 'Refined Concept — Ecommerce Brand Build',
+        overview: 'Co-founded an ecommerce brand with Edison (University of Western Ontario) selling modern furniture and home decor with IKEA-level affordability but a more premium, prestige feel.',
+        role: 'Co-Founder / Brand & Growth Lead',
+        tools: ['Shopify', 'Adobe Photoshop', 'Figma', 'Google Ads', 'Meta Ads'],
+        problem: 'The modern furniture market is dominated by either expensive designer brands or cheap, generic options. We saw an opportunity to create a brand that offers quality modern furniture at accessible prices while maintaining a premium aesthetic.',
+        solution: [
+            'Defined brand positioning: affordable prestige — IKEA pricing with elevated design',
+            'Developed product direction focused on modern couches, furniture, and home decor',
+            'Built premium Shopify storefront with sophisticated UI and clear brand identity',
+            'Created collection structure and merchandising logic for intuitive browsing',
+            'Established visual language and brand guidelines for consistent presentation'
+        ],
+        outcomes: [
+            'Launched cohesive brand with clear market differentiation',
+            'Built storefront that communicates premium value at accessible prices',
+            'Created scalable collection framework for product expansion',
+            'Established partnership workflow for ongoing collaboration'
+        ]
+    },
     'creative-system': {
         category: 'Marketing Strategy',
         title: 'Growth + Creative System',
-        overview: 'Built a systematic ad creative testing framework and iteration pipeline to move from guesswork to data-driven creative decisions.',
+        overview: 'Built a systematic ad creative testing framework for Google Ads and Meta Ads, using Photoshop, Premiere Pro, and After Effects to produce UGC-style creatives with a focus on stronger hooks and rapid iteration.',
         role: 'Marketing Strategist & Creative Director',
-        tools: ['Google Ads', 'GA4', 'Google Tag Manager', 'Adobe Premiere Pro', 'Adobe After Effects'],
-        problem: 'Creative fatigue was killing ad performance. The team was producing content without a clear testing methodology, leading to inconsistent results and wasted ad spend. There was no systematic way to identify what creative elements were actually driving conversions.',
+        tools: ['Google Ads', 'Meta Ads', 'GA4', 'Google Tag Manager', 'Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects'],
+        problem: 'Creative fatigue was killing ad performance across Google and Meta platforms. The team was producing content without a clear testing methodology, leading to inconsistent results and wasted ad spend. Hooks weren\'t grabbing attention in the first 2 seconds, and there was no systematic way to identify what creative elements were actually driving conversions.',
         solution: [
             'Designed a modular creative testing framework that isolates variables (hooks, offers, CTAs, formats)',
+            'Used Photoshop, Premiere Pro, and After Effects to produce UGC-style creatives',
+            'Focused on better hooks and stronger first 2 seconds to improve CTR',
             'Built a tracking system to measure creative performance beyond surface-level metrics',
-            'Created a rapid iteration process: test → analyze → iterate in 7-day cycles',
-            'Established creative briefs and UGC direction guidelines for consistent output',
-            'Implemented naming conventions and organization systems for creative assets'
+            'Created a rapid iteration loop: test → analyze → iterate in short cycles',
+            'Established creative briefs and UGC direction guidelines for consistent output'
         ],
         outcomes: [
             'Reduced time-to-insight on creative performance from weeks to days',
             'Established repeatable process that identified winning hooks consistently',
-            'Created documentation and playbooks for scaling creative production',
-            'Improved creative team efficiency by standardizing the feedback loop'
+            'Improved hook quality leading to better first-impression engagement',
+            'Created documentation and playbooks for scaling creative production'
         ]
     },
     'shopify-storefront': {
@@ -225,12 +269,21 @@ function openProjectModal(projectId) {
         `<li>${item}</li>`
     ).join('');
 
+    const timelineHTML = project.timeline
+        ? `<div class="modal-section">
+            <h3 class="modal-section-title">Timeline</h3>
+            <p class="modal-section-content modal-timeline">${project.timeline}</p>
+        </div>`
+        : '';
+
     modalContent.innerHTML = `
         <div class="modal-header">
             <span class="modal-category">${project.category}</span>
             <h2 class="modal-title" id="modal-title">${project.title}</h2>
             <p class="modal-overview">${project.overview}</p>
         </div>
+
+        ${timelineHTML}
 
         <div class="modal-section">
             <h3 class="modal-section-title">My Role</h3>
@@ -319,7 +372,7 @@ function trapFocus(element) {
  */
 function setupRevealAnimations() {
     const revealElements = document.querySelectorAll(
-        '.bento-card, .project-card, .skill-group'
+        '.bento-card, .project-card, .skill-group, .education-card'
     );
 
     // Add reveal class to elements
